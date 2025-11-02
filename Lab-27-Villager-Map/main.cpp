@@ -60,11 +60,11 @@ int main() {
         cin.ignore();
         switch (choice) {
             case 1:
-                add_villager(villagers)
+                add_villager(villagers);
                 output(villagers);
                 break;
             case 2:
-                delete_villager(villagers)
+                delete_villager(villagers);
                 output(villagers);
                 break;
             case 3:
@@ -143,16 +143,20 @@ void add_villager(map<string, tuple<int,string,string>> &villagers){
     cout << "Viillager name: ";
     cin >> name;
     cin.ignore();
-    cout << "Friendship level: ";
+    cout << "Friendship level(0-10): ";
     cin >> friendship;
+    if (friendship < 0 || friendship > 10) {
+        cout << "Invalid Friendship level inputted" << endl;
+        return;
+    }
     cin.ignore();
     cout << "Species: ";
     cin >> species;
     cin.ignore();
     cout << "Phrase: ";
     getline(cin,phrase);
-    cin.ignore();
     villagers.insert({name, make_tuple(friendship,species,phrase)});
+    cout << name << " Added" << endl;
 }
 
 void delete_villager(map<string, tuple<int,string,string>> &villagers){
