@@ -8,13 +8,18 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main() {
     // declarations
-    map<string, vector<string>> villagerColors;
+    map<string, tuple<int,string,string>> villagers;
+    
+    villagers["Draco"] = make_tuple(7,"Dogs", "Catch em All!");
+    
 
-    // insert elements into the map
+   /* // insert elements into the map
     // note how the right-hand side of the assignment are the vector elements
     villagerColors["Audie"] = {"Orange", "Yellow", "Red"};
     villagerColors["Raymond"] = {"Black", "Gray", "White"};
@@ -58,7 +63,7 @@ int main() {
     // report size, clear, report size again to confirm map operations
     cout << "\nSize before clear: " << villagerColors.size() << endl;
     villagerColors.clear();
-    cout << "Size after clear: " << villagerColors.size() << endl;
+    cout << "Size after clear: " << villagerColors.size() << endl;*/
 
     return 0;
 }
