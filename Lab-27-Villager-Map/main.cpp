@@ -27,6 +27,16 @@ void search_map(const map<string, tuple<int,string,string>> &villagers);
 //return: none
 void friendship_level(map<string, tuple<int,string,string>> &villagers,bool increase);
 
+//function add_villager adds an element to the map
+//argument: std::map
+//return: none
+void add_villager(map<string, tuple<int,string,string>> &villagers);
+
+//function delete_villager deletes an element from the map
+//argument: std::map
+//return: none
+void delete_villager(map<string, tuple<int,string,string>> &villagers);
+
 int main() {
     // declarations
     map<string, tuple<int,string,string>> villagers;
@@ -39,26 +49,36 @@ int main() {
     villagers.insert({"Draco", make_tuple(7,"Dogs", "Catch em All!")});
     int choice;
     while (again) {
-        cout << "1. Increase Friendship" << endl;
-        cout << "2. Decrease Friendship" << endl;
-        cout << "3. Search for Villager" << endl;
-        cout << "4. Exit" << endl;
+        cout << "1. Add Villager" << endl;
+        cout << "2. Delete Villager" << endl;
+        cout << "3. Increase Friendship" << endl;
+        cout << "4. Decrease Friendship" << endl;
+        cout << "5. Search for Villager" << endl;
+        cout << "6. Exit" << endl;
         cout << "Enter choice: ";
         cin >> choice;
         cin.ignore();
         switch (choice) {
             case 1:
-                friendship_level(villagers, true);
+                add_villager(villagers)
                 output(villagers);
                 break;
             case 2:
-                friendship_level(villagers, false);
+                delete_villager(villagers)
                 output(villagers);
                 break;
             case 3:
-                search_map(villagers);
+                friendship_level(villagers, true);
+                output(villagers);
                 break;
             case 4:
+                friendship_level(villagers, false);
+                output(villagers);
+                break;
+            case 5:
+                search_map(villagers);
+                break;
+            case 6:
                 cout << "Exit Program" << endl;
                 again = false;
                 break;
@@ -115,4 +135,34 @@ void friendship_level(map<string, tuple<int,string,string>> &villagers, bool inc
         }
     } else // if searchKey is not found
         cout << endl << searchKey << " not found." << endl;
+}
+
+void add_villager(map<string, tuple<int,string,string>> &villagers){
+    string name, species, phrase;
+    int friendship;
+    cout << "Viillager name: ";
+    cin >> name;
+    cin.ignore();
+    cout << "Friendship level: ";
+    cin >> friendship;
+    cin.ignore();
+    cout << "Species: ";
+    cin >> species;
+    cin.ignore();
+    cout << "Phrase: ";
+    getline(cin,phrase);
+    cin.ignore();
+    villagers.insert({name, make_tuple(friendship,species,phrase)});
+}
+
+void delete_villager(map<string, tuple<int,string,string>> &villagers){
+    string name;
+    cout << "Viillager name: ";
+    cin >> name;
+    cin.ignore();
+    auto it = villagers.find(name);
+    if (it != villagers.end()) {  // the iterator points to beyond the end of the map
+        villagers.erase(name);
+    } else // if searchKey is not found
+        cout << endl << name << " not found." << endl;
 }
